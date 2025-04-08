@@ -1,0 +1,15 @@
+{
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"files.associations": {
+		"*.hx": "haxe",
+		"*.hscript": "haxe",
+		"*.hsc": "haxe",
+		"*.hxs": "haxe"
+	},
+	"workbench.colorCustomizations": {
+		"activityBar.background": "#3E253C",
+		"titleBar.activeBackground": "#573354",
+		"titleBar.activeForeground": "#FCF9FC"
+	}
+}
