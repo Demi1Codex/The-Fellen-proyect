@@ -5,7 +5,7 @@
 		title="Project Fellen - Codename Engine" main="funkin.backend.system.Main"
 		file="ProjectFellen" packageName="com.Azdradel.ProjectFellen"
 		package="com.Azdradel.ProjectFellen"
-		version="0.0.2" company="Demi1Codex" />
+		version="0.1.0" company="AzdraMods" />
 
 	<!--
 		CHANGE THE SAVE PATH & NAME FOR YOUR MOD HERE!
