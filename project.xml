@@ -3,14 +3,14 @@
 	<!-- _________________________ Application Settings _________________________ -->
 	<app
 		title="Project Fellen - Codename Engine" main="funkin.backend.system.Main"
-		file="ProjectFellen" packageName="com.yoshman29.codenameengine"
-		package="com.yoshman29.codenameengine"
-		version="0.1.0" company="Yoshman29" />
+		file="ProjectFellen" packageName="com.Azdradel.ProjectFellen"
+		package="com.Azdradel.ProjectFellen"
+		version="0.0.2" company="Demi1Codex" />
 
 	<!--
 		CHANGE THE SAVE PATH & NAME FOR YOUR MOD HERE!
 	-->
-	<app save-path="YoshiCrafter29/CodenameEngine" save-name="save-default" mod-saves="true" />
+	<app save-path="Azdradel/ProjectFellen" save-name="save-default" mod-saves="true" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
