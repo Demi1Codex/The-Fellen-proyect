@@ -8,8 +8,9 @@
 		"*.hxs": "haxe"
 	},
 	"workbench.colorCustomizations": {
-		"activityBar.background": "#3E253C",
-		"titleBar.activeBackground": "#573354",
+		"activityBar.background": "#253e36",
+		"titleBar.activeBackground": "#253e36",
 		"titleBar.activeForeground": "#FCF9FC"
+		
 	}
 }
