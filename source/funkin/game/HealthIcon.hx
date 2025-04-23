@@ -40,6 +40,7 @@ class HealthIcon extends FlxSprite
 		if (am <= 0) healthSteps = [
 			0  => 1, // losing icon
 			20 => 0, // normal icon
+			80 => 2  // winner icon
 		];
 	}
 
@@ -68,10 +69,12 @@ class HealthIcon extends FlxSprite
 			healthSteps = [
 				0  => 1, // losing icon
 				20 => 0, // normal icon
+				80 => 2  // winner icon
 			];
 
-			if (frames.frames.length >= 3)
-				healthSteps[80] = 2; // winning icon
+			if (frames.frames.length >= 3) {
+				animation.add('winner', [2], 0, false, isPlayer); // Añade la animación para el ícono "winner"
+			}
 		}
 	}
 
