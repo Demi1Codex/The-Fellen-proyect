@@ -112,9 +112,9 @@ class FlxView3D extends FlxSprite
 		return view != null ? view.width = width : width;
 	}
 
-	@:noCompletion override function set_height(newHeight:Float):Float
+	@:noCompletion override function set_height(height:Float):Float
 	{
-		super.set_height(newHeight);
+		super.set_height(height);
 		return view != null ? view.height = height : height;
 	}
 	#end
