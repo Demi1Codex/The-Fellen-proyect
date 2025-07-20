@@ -30,6 +30,8 @@ class MainMenuState extends MusicBeatState
 
 	public var canAccessDebugMenus:Bool = true;
 
+	var bgCharacter:FlxSprite; // Añade esta variable arriba, junto a las otras
+
 	override function create()
 	{
 		super.create();
@@ -56,6 +58,19 @@ class MainMenuState extends MusicBeatState
 			bg.screenCenter();
 			bg.antialiasing = true;
 		}
+
+		// Crear el personaje de fondo a la izquierda
+		bgCharacter = new FlxSprite();
+		bgCharacter.frames = Paths.getFrames('menus/mainmenu/bgCharacter');
+		bgCharacter.animation.addByPrefix('idle', 'idle', 24, true);
+		bgCharacter.animation.play('idle', true);
+		bgCharacter.antialiasing = true;
+		bgCharacter.scrollFactor.set(0, 0);
+        bgCharacter.scale.set(0.8, 0.8); // Ajusta el tamaño del personaje
+		bgCharacter.x += 740; // Mueve a la derecha
+		bgCharacter.y -= 1; // Mueve hacia arriba
+
+		add(bgCharacter);
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -183,6 +198,7 @@ class MainMenuState extends MusicBeatState
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.animation.play('idle');
+			spr.angle = 10; // Rota 10 grados hacia la derecha
 
 			if (spr.ID == curSelected)
 			{
