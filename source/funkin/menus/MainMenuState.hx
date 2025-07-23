@@ -31,6 +31,7 @@ class MainMenuState extends MusicBeatState
 	public var canAccessDebugMenus:Bool = true;
 
 	var bgCharacter:FlxSprite; // Añade esta variable arriba, junto a las otras
+	var chosenBgChar:String = ""; // Nueva variable para el personaje de fondo
 
 	override function create()
 	{
@@ -59,14 +60,23 @@ class MainMenuState extends MusicBeatState
 			bg.antialiasing = true;
 		}
 
-		// Crear el personaje de fondo a la izquierda
+		// Array de posibles sprites de fondo
+		var bgCharacters = ['bgCharacter', 'bgCharacterAlt']; // Agrega aquí los nombres de tus sprites alternativos
+
+		// Por defecto usa el primero, pero con 50% de probabilidad usa el segundo (si existe)
+		chosenBgChar = bgCharacters[0];
+		if (bgCharacters.length > 1 && FlxG.random.bool(60)) {
+				chosenBgChar = bgCharacters[1];
+		}
+
+		// Crear el personaje de fondo centrado
 		bgCharacter = new FlxSprite();
-		bgCharacter.frames = Paths.getFrames('menus/mainmenu/bgCharacter');
+		bgCharacter.frames = Paths.getFrames('menus/mainmenu/' + chosenBgChar);
 		bgCharacter.animation.addByPrefix('idle', 'idle', 24, true);
 		bgCharacter.animation.play('idle', true);
 		bgCharacter.antialiasing = true;
 		bgCharacter.scrollFactor.set(0, 0);
-        bgCharacter.scale.set(0.8, 0.8); // Ajusta el tamaño del personaje
+		bgCharacter.scale.set(0.8, 0.8);
 		bgCharacter.x += 740; // Mueve a la derecha
 		bgCharacter.y -= 1; // Mueve hacia arriba
 
@@ -128,7 +138,7 @@ class MainMenuState extends MusicBeatState
 			var downP = controls.DOWN_P;
 			var scroll = FlxG.mouse.wheel;
 
-			if (upP || downP || scroll != 0)  // like this we wont break mods that expect a 0 change event when calling sometimes  - Nex
+			if (upP || downP || scroll != 0)
 				changeItem((upP ? -1 : 0) + (downP ? 1 : 0) - scroll);
 
 			if (controls.BACK)
