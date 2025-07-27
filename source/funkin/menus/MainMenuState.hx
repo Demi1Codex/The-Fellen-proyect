@@ -33,6 +33,16 @@ class MainMenuState extends MusicBeatState
 	var bgCharacter:FlxSprite; // Añade esta variable arriba, junto a las otras
 	var chosenBgChar:String = ""; // Nueva variable para el personaje de fondo
 
+	var bgCharMap:Map<String, String> = [
+		"story mode" => "bgStory",
+		"freeplay"   => "bgFreeplay",
+		"donate"     => "bgDonate",
+		"credits"    => "bgCredits",
+		"options"    => "bgOptions"
+	];
+
+	var bgCharSprites:Map<String, FlxSprite> = new Map();
+
 	override function create()
 	{
 		super.create();
@@ -61,26 +71,11 @@ class MainMenuState extends MusicBeatState
 		}
 
 		// Array de posibles sprites de fondo
-		var bgCharacters = ['bgCharacter', 'bgCharacterAlt']; // Agrega aquí los nombres de tus sprites alternativos
+		var bgCharacters = ['bgCharacter']; // Solo el sprite principal, sin alternativos
 
-		// Por defecto usa el primero, pero con 50% de probabilidad usa el segundo (si existe)
+		// Por defecto usa el primero
 		chosenBgChar = bgCharacters[0];
-		if (bgCharacters.length > 1 && FlxG.random.bool(60)) {
-				chosenBgChar = bgCharacters[1];
-		}
 
-		// Crear el personaje de fondo centrado
-		bgCharacter = new FlxSprite();
-		bgCharacter.frames = Paths.getFrames('menus/mainmenu/' + chosenBgChar);
-		bgCharacter.animation.addByPrefix('idle', 'idle', 24, true);
-		bgCharacter.animation.play('idle', true);
-		bgCharacter.antialiasing = true;
-		bgCharacter.scrollFactor.set(0, 0);
-		bgCharacter.scale.set(0.8, 0.8);
-		bgCharacter.x += 740; // Mueve a la derecha
-		bgCharacter.y -= 1; // Mueve hacia arriba
-
-		add(bgCharacter);
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -97,6 +92,29 @@ class MainMenuState extends MusicBeatState
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
+		}
+
+		// Cargar y crear todos los sprites de personaje de fondo
+		for (option => charName in bgCharMap) {
+		    var spr = new FlxSprite();
+		    spr.frames = Paths.getFrames('menus/mainmenu/' + charName);
+		    spr.animation.addByPrefix('idle', 'idle', 24, true);
+		    spr.animation.play('idle', true);
+		    spr.antialiasing = true;
+		    spr.scrollFactor.set(0, 0);
+		    spr.scale.set(0.8, 0.8);
+			spr.x += 740; // Mueve a la derecha
+			spr.y -= 1; // Mueve hacia arriba
+		    spr.visible = false;
+		    bgCharSprites.set(option, spr);
+		    add(spr);
+		}
+
+		// Añade el sprite inicial visible
+		var initialOption = optionShit[curSelected];
+		if (bgCharSprites.exists(initialOption)) {
+		    bgCharSprites[initialOption].visible = true;
+		    bgCharacter = bgCharSprites[initialOption];
 		}
 
 		FlxG.camera.follow(camFollow, null, 0.06);
@@ -159,10 +177,10 @@ class MainMenuState extends MusicBeatState
 		super.update(elapsed);
 
 		if (forceCenterX)
-		menuItems.forEach(function(spr:FlxSprite)
-		{
+			menuItems.forEach(function(spr:FlxSprite)
+			{
 
-		});
+			});
 	}
 
 	public override function switchTo(nextState:FlxState):Bool {
@@ -202,13 +220,15 @@ class MainMenuState extends MusicBeatState
 
 		curSelected = event.value;
 
+		updateBgCharacter(optionShit[curSelected]);
+
 		if (event.playMenuSFX)
 			CoolUtil.playMenuSFX(SCROLL, 0.7);
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.animation.play('idle');
-			spr.angle = 10; // Rota 10 grados hacia la derecha
+			spr.angle = 10;
 
 			if (spr.ID == curSelected)
 			{
@@ -222,4 +242,12 @@ class MainMenuState extends MusicBeatState
 			spr.centerOffsets();
 		});
 	}
+	function updateBgCharacter(option:String) {
+    for (spr in bgCharSprites) spr.visible = false;
+    if (bgCharSprites.exists(option)) {
+        bgCharSprites[option].visible = true;
+        bgCharacter = bgCharSprites[option];
+    }
+}
+
 }

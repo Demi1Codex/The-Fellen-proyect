@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="whittyDanceTitle.png">
+<TextureAtlas imagePath="bgStory.png">
 <!-- Created with whitty-executor.exe -->
 <SubTexture name="idle0000" x="0" y="0" width="576" height="663" frameX="-0" frameY="-1" frameWidth="585" frameHeight="673"/>
 <SubTexture name="idle0001" x="0" y="0" width="576" height="663" frameX="-0" frameY="-1" frameWidth="585" frameHeight="673"/>
